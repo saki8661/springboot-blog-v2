@@ -35,6 +35,19 @@ public class UserQueryRepositoryTest {
         System.out.println("1. pc는 비어았다");
         userQueryRepository.findById(1);
         System.out.println("2. pc의 user 1은 영속화 되어 있다");
-        userQueryRepository.findById(2);
+        em.clear();
+        userQueryRepository.findById(1);
     }
+
+    @Test
+    public void update_test() {
+        // JPA update 알고리즘
+        // 1. 업데이트 할 객체를 영속화
+        // 2. 객체 상태 변경
+        // 3. em.flush() or @Transactional 정상 종료
+        // 테스트의 끝은 롤백이 일어나기 때문에 트랜잭션을 확인 할 수 없다
+        User user = userQueryRepository.findById(1);
+        user.setEmail("ssarmango@nate.com");
+        em.flush();
+    } // rollback
 }

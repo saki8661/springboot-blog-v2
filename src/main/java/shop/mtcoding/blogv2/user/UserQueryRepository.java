@@ -19,9 +19,7 @@ public class UserQueryRepository {
     }
 
     public User findById(Integer id) {
-        Query query = em.createQuery("select u from User u where u.id =:id", User.class);
-        query.setParameter("id", id);
-        return (User) query.getSingleResult();
+        return em.find(User.class, id);
     }
 
 }
