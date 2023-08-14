@@ -76,3 +76,22 @@ create table reply_tb (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 ```
+
+### 08/14
+
+1. 영속화 컨텍스트 테스트
+
+   - persist
+   - clear
+   - flush
+
+2. 회원가입
+
+3. 로그인
+
+   - 자바스크립트 활용
+   - 히스토리백과 하이퍼링크 이동
+
+4. 회원수정
+
+   - 세션과 DB의 동기화필요성
