@@ -27,7 +27,9 @@ public class BoardRepositoryTest {
     public void findAll_paging_test() throws JsonProcessingException {
         Pageable pageable = PageRequest.of(0, 3, Sort.Direction.DESC, "id");
         Page<Board> boardPG = boardRepository.findAll(pageable);
+
         ObjectMapper om = new ObjectMapper();
+        // // ObjectMapper는 boardPG객체의 getter를 호출하면서 json을 만단다.
         String json = om.writeValueAsString(boardPG); // 자바객체를 JSON으로 변환
         System.out.println(json);
     }
@@ -50,6 +52,7 @@ public class BoardRepositoryTest {
         // Lazy Loading - 지연로딩
         // 연관된 객체에 null을 참조하려고 하면 조회가 일어남
         System.out.println(boardList.get(0).getUser().getUsername()); // null -> ssar (조회 O)
+        System.out.println(boardList.get(3).getUser().getUsername());
     }
 
     @Test
