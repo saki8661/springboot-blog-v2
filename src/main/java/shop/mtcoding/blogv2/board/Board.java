@@ -35,7 +35,7 @@ public class Board {
     private String content;
 
     // EAGER는 바로 조회한다(디폴트)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user; // 1+N
 
     @CreationTimestamp // 자동으로 자바에서 시간을 만들어줌
