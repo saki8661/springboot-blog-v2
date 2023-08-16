@@ -95,3 +95,23 @@ create table reply_tb (
 4. 회원수정
 
    - 세션과 DB의 동기화필요성
+
+### 08/16
+
+1. 더티체킹
+
+2. 게시글 목록보기
+
+   - fetch
+   - ORM, Hibernate와 JPA
+
+3. Lazy로딩
+
+   - LAZY와 EAGER
+   - fail on empty beans오류와 해결
+
+4. 페이징
+
+5. 로그아웃
+
+6. 로그인 화면 수정
