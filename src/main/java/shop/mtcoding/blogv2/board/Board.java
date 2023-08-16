@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +34,9 @@ public class Board {
     @Column(nullable = true, length = 10000)
     private String content;
 
-    @ManyToOne
-    private User user;
+    // EAGER는 바로 조회한다(디폴트)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user; // 1+N
 
     @CreationTimestamp // 자동으로 자바에서 시간을 만들어줌
     private Timestamp createdAt;

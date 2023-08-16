@@ -4,12 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import shop.mtcoding.blogv2.user.User;
 
 @Controller
 public class BoardController {
     @Autowired
     private BoardService boardService;
+
+    // localhost:8080?page=1&keyword=바나나
+    @GetMapping("/")
+    public String 봉준이(@RequestParam(defaultValue = "0") Integer page) {
+        boardService.게시글목록보기();
+        return "index";
+    }
 
     @GetMapping("/board/saveForm")
     public String saveForm() {

@@ -20,4 +20,8 @@ public class BoardService {
                 .build();
         boardRepository.save(board);
     }
+
+    public void 게시글목록보기() {
+        boardRepository.findAll();
+    }
 }
