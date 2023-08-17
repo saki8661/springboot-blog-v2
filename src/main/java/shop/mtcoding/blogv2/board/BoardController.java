@@ -45,6 +45,12 @@ public class BoardController {
     public String detail(@PathVariable Integer id, Model model) {
         Board board = boardService.상세보기(id);
         model.addAttribute("board", board);
+        // 1. board/detail 파일을 read String변수에 담기
+        // 2. String변수에 {{}}이걸 다 찾아야함
+        // 3. {{바인딩}}
+        // 4. 순수한 html 변환 -> 템플릿 엔진이 4번까지 해준다
+        // 5. response객체의 버퍼에 담기
+        // 6. flush
         return "board/detail";
     }
 
