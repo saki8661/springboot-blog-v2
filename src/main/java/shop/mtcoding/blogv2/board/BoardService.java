@@ -1,6 +1,7 @@
 package shop.mtcoding.blogv2.board;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.ToString;
+import shop.mtcoding.blogv2.board.BoardRequest.UpdateDTO;
 import shop.mtcoding.blogv2.user.User;
 
 /*
@@ -44,4 +46,20 @@ public class BoardService {
         // board 만 가져오면 된다!!
         return boardRepository.findById(id).get();
     }
+
+    @Transactional
+    public void 삭제하기(Integer id) {
+        boardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void 게시글수정하기(Integer id, UpdateDTO updateDTO) {
+        Optional<Board> boardOP = boardRepository.findById(id);
+        if (boardOP.isPresent()) {
+            Board board = boardOP.get();
+            board.setTitle(updateDTO.getTitle());
+            board.setContent(updateDTO.getContent());
+        }
+    } // (더티체킹)
+
 }

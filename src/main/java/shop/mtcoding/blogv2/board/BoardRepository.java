@@ -16,4 +16,5 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     // fetch를 붙여야 *를 한다.
     @Query("select b from Board b join fetch b.user")
     List<Board> mFindAll();
+
 }

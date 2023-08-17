@@ -25,6 +25,11 @@ public class BoardRepositoryTest {
     private BoardRepository boardRepository;
 
     @Test
+    public void deleteById_test() {
+        boardRepository.deleteById(6);
+    }
+
+    @Test
     public void findById_test() {
         Optional<Board> boardOP = boardRepository.findById(5);
         if (boardOP.isPresent()) { // Board가 존재하면!! (null 안전성 검사)

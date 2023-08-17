@@ -1,8 +1,7 @@
 package shop.mtcoding.blogv2.board;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,13 +13,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import shop.mtcoding.blogv2.user.User;
-
 @Controller
 public class BoardController {
 
     @Autowired
     private BoardService boardService;
+
+    @PostMapping("/board/{id}/update")
+    public String update(@PathVariable Integer id, BoardRequest.UpdateDTO updateDTO) {
+        // where 데이터, body, session값
+        boardService.게시글수정하기(id, updateDTO);
+        return "redirect:/board/" + id;
+    }
+
+    @GetMapping("board/{id}/updateForm")
+    public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
+        Board boardUpdate = boardService.상세보기(id);
+        request.setAttribute("boardUpdate", boardUpdate);
+        return "/board/updateForm";
+    }
+
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable Integer id) {
+        // 인증체크
+        boardService.삭제하기(id);
+        return "redirect:/";
+    }
 
     @GetMapping("/board/{id}")
     public String detail(@PathVariable Integer id, Model model) {
