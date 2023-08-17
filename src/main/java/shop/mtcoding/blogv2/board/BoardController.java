@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.mtcoding.blogv2._core.util.Script;
+
 @Controller
 public class BoardController {
 
@@ -34,10 +36,9 @@ public class BoardController {
     }
 
     @PostMapping("/board/{id}/delete")
-    public String delete(@PathVariable Integer id) {
-        // 인증체크
+    public @ResponseBody String delete(@PathVariable Integer id) {
         boardService.삭제하기(id);
-        return "redirect:/";
+        return Script.href("/");
     }
 
     @GetMapping("/board/{id}")
