@@ -1,7 +1,6 @@
 package shop.mtcoding.blogv2.board;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +19,11 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
+
+    @Autowired
+    private BoardRepository boardRepository;
+
+    
 
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable Integer id, BoardRequest.UpdateDTO updateDTO) {
@@ -52,6 +56,12 @@ public class BoardController {
         // 5. response객체의 버퍼에 담기
         // 6. flush
         return "board/detail";
+    }
+
+    @GetMapping("/test/board/{id}")
+    public @ResponseBody Board testDetail(@PathVariable Integer id) {
+        Board board = boardRepository.mFindByIdJoinRepliesInUser(id).get();
+        return board;
     }
 
     // localhost:8080?page=1&keyword=바나나

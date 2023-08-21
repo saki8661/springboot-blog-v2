@@ -1,6 +1,5 @@
 package shop.mtcoding.blogv2.board;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.ToString;
 import shop.mtcoding.blogv2.board.BoardRequest.UpdateDTO;
 import shop.mtcoding.blogv2.user.User;
 
@@ -44,7 +42,7 @@ public class BoardService {
 
     public Board 상세보기(Integer id) {
         // board 만 가져오면 된다!!
-        Optional<Board> boardOP = boardRepository.findById(id);
+        Optional<Board> boardOP = boardRepository.mFindByIdJoinRepliesInUser(id);
         if (boardOP.isPresent()) {
             return boardOP.get();
         } else {

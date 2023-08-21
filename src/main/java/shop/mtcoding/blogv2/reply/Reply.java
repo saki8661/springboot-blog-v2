@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +36,7 @@ public class Reply {
     @Column(nullable = false, length = 100)
     private String comment;
 
+    @JsonIgnoreProperties({"password", "eamil", "createdAt"})
     @ManyToOne
     private User user;
 
