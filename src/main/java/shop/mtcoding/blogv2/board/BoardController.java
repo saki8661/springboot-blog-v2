@@ -28,11 +28,11 @@ public class BoardController {
         return "redirect:/board/" + id;
     }
 
-    @GetMapping("board/{id}/updateForm")
-    public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
-        Board boardUpdate = boardService.상세보기(id);
-        request.setAttribute("boardUpdate", boardUpdate);
-        return "/board/updateForm";
+    @GetMapping("/board/{id}/updateForm")
+    public String updateForm(@PathVariable Integer id, Model model) {
+        Board board = boardService.상세보기(id);
+        model.addAttribute("board", board); // request에 담는 것과 동일
+        return "board/updateForm";
     }
 
     @PostMapping("/board/{id}/delete")

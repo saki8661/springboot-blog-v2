@@ -1,7 +1,5 @@
 package shop.mtcoding.blogv2.board;
 
-import static org.mockito.ArgumentMatchers.booleanThat;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -31,15 +29,22 @@ public class BoardRepositoryTest {
         } catch (Exception e) {
             System.out.println("괜찮아");
         }
+
     } // rollback
+
+    @Test
+    public void mFindById_test() {
+        boardRepository.mFindById(1);
+    }
+
+    @Test
+    public void mFindByIdJoinUserAndReplies_test(){
+        boardRepository.mFindByIdJoinUserAndReplies(1);
+    }
 
     @Test
     public void findById_test() {
         Optional<Board> boardOP = boardRepository.findById(5);
-        if (boardOP.isPresent()) { // Board가 존재하면!! (null 안전성 검사)
-            System.out.println("테스트 : board가 있습니다");
-
-        }
     }
 
     @Test
@@ -48,7 +53,7 @@ public class BoardRepositoryTest {
         Page<Board> boardPG = boardRepository.findAll(pageable);
 
         ObjectMapper om = new ObjectMapper();
-        // // ObjectMapper는 boardPG객체의 getter를 호출하면서 json을 만단다.
+        // ObjectMapper는 boardPG객체의 getter를 호출하면서 json을 만든다.
         String json = om.writeValueAsString(boardPG); // 자바객체를 JSON으로 변환
         System.out.println(json);
     }
@@ -63,14 +68,14 @@ public class BoardRepositoryTest {
         System.out.println("조회 직전");
         List<Board> boardList = boardRepository.findAll();
         System.out.println("조회 후 : Lazy");
-        // 행 5개 -> 객체 : 5개
+        // 행 : 5개 -> 객체 : 5개
         // 각행 : Board (id=1, title=제목1, content=내용1, created_at=날짜, User(id=1))
         System.out.println(boardList.get(0).getId()); // 1번 (조회 X)
         System.out.println(boardList.get(0).getUser().getId()); // 1번 (조회 X)
 
         // Lazy Loading - 지연로딩
-        // 연관된 객체에 null을 참조하려고 하면 조회가 일어남
-        System.out.println(boardList.get(0).getUser().getUsername()); // null -> ssar (조회 O)
+        // 연관된 객체에 null을 참조하려고 하면 조회가 일어남 (조회 O)
+        System.out.println(boardList.get(0).getUser().getUsername()); // null -> ssar
         System.out.println(boardList.get(3).getUser().getUsername());
     }
 
@@ -88,5 +93,4 @@ public class BoardRepositoryTest {
         // 디비데이터와 동기화됨
         System.out.println(board.getId());
     }
-
 }
