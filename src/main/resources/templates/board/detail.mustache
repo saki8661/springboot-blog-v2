@@ -32,8 +32,41 @@
             </form>
         </div>
 
-        <script>
-            async function saveReply(){
+        <!-- 댓글목록 -->
+        <div class="card-footer">
+            <b>댓글리스트</b>
+        </div>
+        <div class="list-group">
+            {{#board.replies}}
+            <!-- 댓글아이템 -->
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="d-flex">
+                    <div class="px-1 me-1 bg-primary text-white rounded">{{user.username}}</div>
+                    <div>{{comment}}</div>
+                </div>
+                <form>
+                    <button type="button" class="btn" onclick="deleteReply('{{id}}')">🗑</button>
+                </form>
+            </div>
+            {{/board.replies}}
+        </div>
+    </div>
+</div>
+
+<script>
+    async function deleteReply(id){
+        let response = await fetch(`/api/reply/${id}/delete` ,{
+            method: "delete"
+        });
+        let responseBody = await response.json();
+        if(responseBody.success){
+            location.reload();
+        }else{
+            alert(responseBody.data);
+        }
+    }
+
+    async function saveReply(){
                 let requsetBody = {
                     boardId: document.querySelector("#boardId").value,
                     comment: document.querySelector("#comment").value
@@ -58,28 +91,6 @@
                     alert(responseBody.data);
                 }
             }
-        </script>
-
-        <!-- 댓글목록 -->
-        <div class="card-footer">
-            <b>댓글리스트</b>
-        </div>
-        <div class="list-group">
-            {{#board.replies}}
-            <!-- 댓글아이템 -->
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex">
-                    <div class="px-1 me-1 bg-primary text-white rounded">{{user.username}}</div>
-                    <div>{{comment}}</div>
-                </div>
-                <form action="/reply/{{id}}/delete" method="post">
-                    <input type="hidden" name="boardId" value="{{board.id}}">
-                    <button class="btn">🗑</button>
-                </form>
-            </div>
-            {{/board.replies}}
-        </div>
-    </div>
-</div>
+</script>
 
 {{> layout/footer}}
