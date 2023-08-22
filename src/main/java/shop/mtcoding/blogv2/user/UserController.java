@@ -4,12 +4,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.blogv2._core.error.ex.MyException;
+import shop.mtcoding.blogv2._core.util.ApiUtil;
 import shop.mtcoding.blogv2._core.util.Script;
 
 @Controller
@@ -20,6 +24,20 @@ public class UserController {
 
     @Autowired
     private HttpSession session;
+
+    @GetMapping("/api/check")
+    public @ResponseBody ApiUtil<String> checkUsername(String username) {
+        return userService.checkUsername(username);
+    }
+
+    // @GetMapping("/check")
+    // public ResponseEntity<String> check(String username) {
+    //     User user = userRepository.findByUsername(username);
+    //     if (user != null) {
+    //         return new ResponseEntity<String>("유저네임이 중복 되었습니다", HttpStatus.BAD_REQUEST);
+    //     }
+    //     return new ResponseEntity<String>("유저네임을 사용할 수 있습니다", HttpStatus.OK);
+    // }
 
     // 브라우저 GET /logout 요청을 함 (repuest 1)
     // 서버는 / 주소를 응답의 헤더에 담음 (Location), 상태코드 302

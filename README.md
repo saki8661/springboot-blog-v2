@@ -133,3 +133,11 @@ create table reply_tb (
 2. 댓글 삭제
 
 3. 댓글 쓰기
+
+### 08/22
+
+1. 댓글쓰기
+
+2. 댓글삭제
+
+3. cascade 옵션, fk null
