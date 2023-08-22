@@ -23,7 +23,21 @@ public class ReplyService {
         }
     }
 
-    public void 댓글쓰기(SaveDTO saveDTO, Integer id) {
+    @Transactional
+    public void 댓글쓰기(SaveDTO saveDTO, Integer sessionId) {
+        // insert into reply_tb(comment, board_id, user_id) values(?, ?, ?)
+
+        // 1. board id가 존재하는지 유무
+        Board board = Board.builder().id(saveDTO.getBoardId()).build();
+        User user = User.builder().id(sessionId).build();
+
+        Reply reply = Reply.builder()
+        .comment(saveDTO.getComment())
+        .board(board)
+        .user(user)
+        .build();
+        replyRepository.save(reply); // entity : Reply 객체
+
     }
 
     // @Transactional
