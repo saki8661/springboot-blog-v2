@@ -57,8 +57,12 @@ public class UserController {
 
     // M - V - C
     @PostMapping("/join")
-    public String join(UserRequest.JoinDTO joinDTO) {
+    public @ResponseBody String join(UserRequest.JoinDTO joinDTO) {
         // 10초짜리 코드
+        // System.out.println(joinDTO.getPic().getOriginalFilename());
+        // System.out.println(joinDTO.getPic().getSize());
+        // System.out.println(joinDTO.getPic().getContentType());
+
         userService.회원가입(joinDTO);
         return "user/loginForm"; // persist 초기화
     }
