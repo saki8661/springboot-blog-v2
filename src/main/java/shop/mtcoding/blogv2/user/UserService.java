@@ -36,8 +36,15 @@ public class UserService {
     public void 회원가입(JoinDTO joinDTO) {
 
         UUID uuid = UUID.randomUUID(); // 랜덤한 해시값을 만들어줌
-        String fileName = uuid+"_"+joinDTO.getPic().getOriginalFilename();
-        System.out.println("fileName : "+fileName);
+
+         String fileName = uuid+"_"+joinDTO.getPic().getOriginalFilename();
+
+        // String fileName = null;
+        // if (fileName != null) {
+        //    fileName = uuid+"_"+joinDTO.getPic().getOriginalFilename();
+        // } 
+        // fileName = "basic.jpg";
+        // System.out.println("fileName : "+fileName);
 
         // 프로젝트 실행 파일변경 -> blogv2-1.0.jar
         // 해당 실행파일 경로에 images 폴더가 필요함
