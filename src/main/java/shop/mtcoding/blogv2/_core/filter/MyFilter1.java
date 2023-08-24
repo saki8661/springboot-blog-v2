@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
-
+@Component
 public class MyFilter1 implements Filter {
 
     @Override
@@ -28,13 +28,13 @@ public class MyFilter1 implements Filter {
         System.out.println("접속자 user agent : "+req.getHeader("User-Agent"));
 
         // 2. 블랙리스트 추방
-        if(req.getHeader("User-Agent").contains("Chrome")){
+        if(req.getHeader("User-Agent").contains("PostmanRuntime")){
             //resp.setContentType("text/html; charset=utf-8");
             resp.setHeader("Content-Type", "text/html; charset=utf-8");
             PrintWriter out = resp.getWriter();
 
             req.setAttribute("name", "홍길동");
-            out.println("<h1>나가세요 크롬이면 : "+req.getAttribute("name")+"</h1>");
+            out.println("<h1>포스트맨은 물러가라!!! : "+req.getAttribute("name")+"</h1>");
             return;
         }
 

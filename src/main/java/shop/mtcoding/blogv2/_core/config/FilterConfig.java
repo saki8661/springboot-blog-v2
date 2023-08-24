@@ -16,10 +16,10 @@ public class FilterConfig {
 
     // 필터를 등록하는 용도
     @Bean
-    public FilterRegistrationBean<MyFilter1> myFilter1(){
+    public FilterRegistrationBean<MyFilter1> MyFilter1(){
         FilterRegistrationBean<MyFilter1> bean = new FilterRegistrationBean<>(new MyFilter1());
         bean.addUrlPatterns("/*"); // 슬래시로 시작하는 모든 주소에 발동됨
         bean.setOrder(0); // 낮은 번호부터 실행됨
-        return null;
+        return bean;
     }
 }
